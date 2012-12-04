@@ -2,7 +2,7 @@
 
 ## How to Install ##
 
-1. Open up the Command Palette. (`Command+Shift+P` or `Ctrl+Shift+P`)
+1. Open up the Command Palette. (`Command`+`Shift`+`P` or `Ctrl`+`Shift`+`P`)
 2. Run `Package Control: Install Package` command, find and install `OpenGL Shading Language (GLSL)` package.
 3. Restart Sublime Text 2. (if required)
 
