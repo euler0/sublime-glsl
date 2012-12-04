@@ -1,0 +1,15 @@
+{
+  "folders":
+  [
+    {
+      "path": ".",
+      "file_exclude_patterns": ["*.sublime-workspace"]
+    }
+  ],
+  "settings":
+  {
+    "tab_size": 2,
+    "ensure_newline_at_eof_on_save": true,
+    "trim_trailing_white_space_on_save": true
+  }
+}
