@@ -1,6 +1,10 @@
 # Sublime Text 2 - GLSL Package #
 
-- This package uses [polym0rph](https://github.com/polym0rph)'s [GLSL TextMate Bundle](https://github.com/polym0rph/GLSL.tmbundle).
+## How to Install ##
+
+1. Open up the Command Palette. (`Command+Shift+P` or `Ctrl+Shift+P`)
+2. Run `Package Control: Install Package` command, find and install `OpenGL Shading Language (GLSL)` package.
+3. Restart Sublime Text 2. (if required)
 
 ## Thanks to ##
 
