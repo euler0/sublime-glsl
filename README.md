@@ -4,7 +4,7 @@
 
 1. Open up the Command Palette. (`Command`+`Shift`+`P` or `Control`+`Shift`+`P`)
 2. Run `Package Control: Install Package` command, find and install `OpenGL Shading Language (GLSL)` package.
-3. Restart Sublime Text 2. (if required)
+3. Restart Sublime Text. (if required)
 
 ## Thanks to ##
 
