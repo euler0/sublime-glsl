@@ -1,4 +1,4 @@
-# Sublime Text 2 - GLSL Package #
+# Sublime Text 2 & 3 - GLSL Package #
 
 ## How to Install ##
 
