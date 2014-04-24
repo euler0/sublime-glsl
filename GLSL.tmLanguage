@@ -16,6 +16,7 @@
 		<string>vert</string>
 		<string>frag</string>
 		<string>geom</string>
+		<string>glsl</string>
 		<string>f.glsl</string>
 		<string>v.glsl</string>
 		<string>g.glsl</string>
