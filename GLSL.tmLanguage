@@ -33,6 +33,12 @@
 	<array>
 		<dict>
 			<key>match</key>
+			<string>^\s*#\s*(define|undef|if|ifdef|ifndef|else|elif|endif|error|pragma|extension|version|line)\b</string>
+			<key>name</key>
+			<string>keyword.control.glsl</string>
+		</dict>
+		<dict>
+			<key>match</key>
 			<string>\b(break|case|continue|default|discard|do|else|for|if|return|switch|while)\b</string>
 			<key>name</key>
 			<string>keyword.control.glsl</string>
