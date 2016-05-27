@@ -128,12 +128,6 @@
 			<key>name</key>
 			<string>support.function.glsl</string>
 		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b(asm|enum|extern|goto|inline|long|short|sizeof|static|typedef|union|unsigned)\b</string>
-			<key>name</key>
-			<string>invalid.illegal.glsl</string>
-		</dict>
 	</array>
 	<key>scopeName</key>
 	<string>source.glsl</string>
