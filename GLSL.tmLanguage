@@ -35,6 +35,46 @@
 	<key>patterns</key>
 	<array>
 		<dict>
+			<key>begin</key>
+			<string>/\*</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.comment.block.begin.glsl</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>\*/</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.comment.block.end.glsl</string>
+				</dict>
+			</dict>
+			<key>name</key>
+			<string>comment.block.glsl</string>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>//</string>
+			<key>beginCapture</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.comment.glsl</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>\n</string>
+			<key>name</key>
+			<string>comment.line.double-slash.glsl</string>
+		</dict>
+		<dict>
 			<key>match</key>
 			<string>^\s*#\s*(define|undef|if|ifdef|ifndef|else|elif|endif|error|pragma|extension|version|line)\b</string>
 			<key>name</key>
@@ -93,10 +133,6 @@
 			<string>\b(asm|enum|extern|goto|inline|long|short|sizeof|static|typedef|union|unsigned)\b</string>
 			<key>name</key>
 			<string>invalid.illegal.glsl</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>source.c</string>
 		</dict>
 	</array>
 	<key>scopeName</key>
