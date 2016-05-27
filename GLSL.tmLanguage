@@ -35,6 +35,14 @@
 	<key>patterns</key>
 	<array>
 		<dict>
+			<key>include</key>
+			<string>#literal</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#operator</string>
+		</dict>
+		<dict>
 			<key>begin</key>
 			<string>/\*</string>
 			<key>beginCaptures</key>
@@ -129,6 +137,98 @@
 			<string>support.function.glsl</string>
 		</dict>
 	</array>
+	<key>repository</key>
+	<dict>
+		<key>literal</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#numeric-literal</string>
+				</dict>
+			</array>
+		</dict>
+		<key>operator</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#arithmetic-operator</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#increment-decrement-operator</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#bitwise-operator</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#comparative-operator</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#assignment-operator</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#logical-operator</string>
+				</dict>
+			</array>
+		</dict>
+		<key>numeric-literal</key>
+		<dict>
+			<key>match</key>
+			<string>\b([0-9][0-9_]*)(\.([0-9][0-9_]*))?([eE][+/-]?([0-9][0-9_]*))?\b</string>
+			<key>name</key>
+			<string>constant.numeric.glsl</string>
+		</dict>
+		<key>arithmetic-operator</key>
+		<dict>
+			<key>match</key>
+			<string>(?&lt;![/=\-+!*%&lt;&gt;&amp;|\^~.])(\+|\-|\*|\/)(?![/=\-+!*%&lt;&gt;&amp;|^~.])</string>
+			<key>name</key>
+			<string>keyword.operator.arithmetic.glsl</string>
+		</dict>
+		<key>increment-decrement-operator</key>
+		<dict>
+			<key>match</key>
+			<string>(?&lt;![/=\-+!*%&lt;&gt;&amp;|\^~.])(\+\+|\-\-)(?![/=\-+!*%&lt;&gt;&amp;|^~.])</string>
+			<key>name</key>
+			<string>keyword.operator.increment-or-decrement.glsl</string>
+		</dict>
+		<key>bitwise-operator</key>
+		<dict>
+			<key>match</key>
+			<string>(?&lt;![/=\-+!*%&lt;&gt;&amp;|\^~.])(&lt;&lt;|&gt;&gt;)(?![/=\-+!*%&lt;&gt;&amp;|^~.])</string>
+			<key>name</key>
+			<string>keyword.operator.bitwise.glsl</string>
+		</dict>
+		<key>assignment-operator</key>
+		<dict>
+			<key>match</key>
+			<string>(?&lt;![/=\-+!*%&lt;&gt;&amp;|\^~.])(\+|\-|\*|\/|&lt;&lt;|&gt;&gt;|&amp;|\^|\|)?=(?![/=\-+!*%&lt;&gt;&amp;|^~.])</string>
+			<key>name</key>
+			<string>keyword.operator.assignment.glsl</string>
+		</dict>
+		<key>comparative-operator</key>
+		<dict>
+			<key>match</key>
+			<string>(?&lt;![/=\-+!*%&lt;&gt;&amp;|\^~.])((=|!)=|(&lt;|&gt;)=?)(?![/=\-+!*%&lt;&gt;&amp;|^~.])</string>
+			<key>name</key>
+			<string>keyword.operator.comparative.glsl</string>
+		</dict>
+		<key>logical-operator</key>
+		<dict>
+			<key>match</key>
+			<string>(?&lt;![/=\-+!*%&lt;&gt;&amp;|\^~.])(!|&amp;&amp;|\|\||\^\^)(?![/=\-+!*%&lt;&gt;&amp;|^~.])</string>
+			<key>name</key>
+			<string>keyword.operator.arithmetic.glsl</string>
+		</dict>
+	</dict>
 	<key>scopeName</key>
 	<string>source.glsl</string>
 	<key>uuid</key>
