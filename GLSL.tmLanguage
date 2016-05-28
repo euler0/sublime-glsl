@@ -177,6 +177,10 @@
 					<key>include</key>
 					<string>#logical-operator</string>
 				</dict>
+				<dict>
+					<key>include</key>
+					<string>#ternary-operator</string>
+				</dict>
 			</array>
 		</dict>
 		<key>numeric-literal</key>
@@ -189,7 +193,7 @@
 		<key>arithmetic-operator</key>
 		<dict>
 			<key>match</key>
-			<string>(?&lt;![/=\-+!*%&lt;&gt;&amp;|\^~.])(\+|\-|\*|\/)(?![/=\-+!*%&lt;&gt;&amp;|^~.])</string>
+			<string>(?&lt;![/=\-+!*%&lt;&gt;&amp;|\^~.])(\+|\-|\*|\/|\%)(?![/=\-+!*%&lt;&gt;&amp;|^~.])</string>
 			<key>name</key>
 			<string>keyword.operator.arithmetic.glsl</string>
 		</dict>
@@ -203,14 +207,14 @@
 		<key>bitwise-operator</key>
 		<dict>
 			<key>match</key>
-			<string>(?&lt;![/=\-+!*%&lt;&gt;&amp;|\^~.])(&lt;&lt;|&gt;&gt;)(?![/=\-+!*%&lt;&gt;&amp;|^~.])</string>
+			<string>(?&lt;![/=\-+!*%&lt;&gt;&amp;|\^~.])(~|&amp;|\||\^|&lt;&lt;|&gt;&gt;)(?![/=\-+!*%&lt;&gt;&amp;|^~.])</string>
 			<key>name</key>
 			<string>keyword.operator.bitwise.glsl</string>
 		</dict>
 		<key>assignment-operator</key>
 		<dict>
 			<key>match</key>
-			<string>(?&lt;![/=\-+!*%&lt;&gt;&amp;|\^~.])(\+|\-|\*|\/|&lt;&lt;|&gt;&gt;|&amp;|\^|\|)?=(?![/=\-+!*%&lt;&gt;&amp;|^~.])</string>
+			<string>(?&lt;![/=\-+!*%&lt;&gt;&amp;|\^~.])(\+|\-|\*|\%|\/|&lt;&lt;|&gt;&gt;|&amp;|\^|\|)?=(?![/=\-+!*%&lt;&gt;&amp;|^~.])</string>
 			<key>name</key>
 			<string>keyword.operator.assignment.glsl</string>
 		</dict>
@@ -227,6 +231,13 @@
 			<string>(?&lt;![/=\-+!*%&lt;&gt;&amp;|\^~.])(!|&amp;&amp;|\|\||\^\^)(?![/=\-+!*%&lt;&gt;&amp;|^~.])</string>
 			<key>name</key>
 			<string>keyword.operator.arithmetic.glsl</string>
+		</dict>
+		<key>ternary-operator</key>
+		<dict>
+			<key>match</key>
+			<string>(\?|:)</string>
+			<key>name</key>
+			<string>keyword.operator.ternary.glsl</string>
 		</dict>
 	</dict>
 	<key>scopeName</key>
