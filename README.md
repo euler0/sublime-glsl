@@ -1,5 +1,9 @@
 # Sublime Text 2 & 3 - GLSL Package #
 
+## Supported Extensions
+
+    vs, fs, gs, vsh, fsh, gsh, vshader, fshader, gshader, vert, frag, geom, tesc, tese, comp, glsl
+
 ## How to Install ##
 
 1. Open up the Command Palette. (`Command`+`Shift`+`P` or `Control`+`Shift`+`P`)
