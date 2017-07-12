@@ -239,7 +239,6 @@ contexts:
       scope: invalid.illegal.stray-bracket-end.glsl
 
   late-expressions:
-    - include: modifiers-parens
     - include: modifiers
     - include: types
     - include: function-call
@@ -250,7 +249,6 @@ contexts:
 
   global-modifier:
     - include: comments
-    - include: modifiers-parens
     - include: modifiers
     - match: '(?=\S)'
       set: global-type
@@ -310,7 +308,6 @@ contexts:
     - match: \*
       scope: keyword.operator.glsl
     - include: types
-    - include: modifiers-parens
     - include: modifiers
     # All uppercase identifier just before a newline is most likely a macro
     - match: '[[:upper:][:digit:]_]+\s*$'
@@ -445,7 +442,6 @@ contexts:
     - include: comments
     - match: '(?=\b(?:{{before_tag}}|{{control_keywords}})\b)'
       pop: true
-    - include: modifiers-parens
     - include: modifiers
     # Handle macros so they aren't matched as the class name
     - match: '\b[[:upper:][:digit:]_]+\b'
@@ -500,46 +496,6 @@ contexts:
           scope: punctuation.separator.glsl
           pop: true
         - include: expressions
-
-  modifiers-parens:
-    - match: \b(__attribute__)\s*(\(\()
-      captures:
-        1: storage.modifier.glsl
-        2: meta.group.glsl punctuation.section.group.begin.glsl
-      push :
-        - meta_scope: meta.attribute.glsl
-        - meta_content_scope: meta.group.glsl
-        - include: parens
-        - match: \)\)
-          scope: meta.group.glsl punctuation.section.group.end.glsl
-          pop: true
-    - match: \b(__declspec)(\()
-      captures:
-        1: storage.modifier.glsl
-        2: meta.group.glsl punctuation.section.group.begin.glsl
-      push:
-        - meta_content_scope: meta.group.glsl
-        - match: '\)'
-          scope: meta.group.glsl punctuation.section.group.end.glsl
-          pop: true
-        - match: '\b(align|allocate|code_seg|property|uuid)\b\s*(\()'
-          captures:
-            1: storage.modifier.glsl
-            2: meta.group.glsl punctuation.section.group.begin.glsl
-          push:
-            - meta_content_scope: meta.group.glsl
-            - match: '\)'
-              scope: meta.group.glsl punctuation.section.group.end.glsl
-              pop: true
-            - include: numbers
-            - match: \b(get|put)\b
-              scope: variable.parameter.glsl
-            - match: ','
-              scope: punctuation.separator.glsl
-            - match: '='
-              scope: keyword.operator.assignment.glsl
-        - match: '\b(appdomain|deprecated|dllimport|dllexport|jintrinsic|naked|noalias|noinline|noreturn|nothrow|novtable|process|restrict|safebuffers|selectany|thread)\b'
-          scope: constant.other.glsl
 
   keywords-parens:
     - match: '\b(sizeof)\b\s*(\()'
