@@ -42,13 +42,12 @@ vec4 somefunction(inout vec4 foo)
 //   ^^^^^^^^^^^^ meta.function.glsl entity.name.function
 //                ^^^^^ meta.function.parameters meta.group storage.modifier
 {
+// <- meta.function meta.block punctuation.section.block.begin
     gl_MaxClipPlanes;
     // <- support.constant
     
     gl_Position = vec4(0.0f, 0.0f, 0.0f, 1.0f);
     // <- variable.language
-    
-// <- meta.function meta.block punctuation.section.block.begin
 };
 // <- meta.function meta.block punctuation.section.block.end
  //<- punctuation.terminator
