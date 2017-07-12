@@ -109,12 +109,6 @@ contexts:
         1: punctuation.accessor.glsl
         2: variable.other.member.glsl
 
-  label:
-    - match: '^\s*((?!default){{identifier}})(:)(?!:)'
-      captures:
-        1: entity.name.label.glsl
-        2: punctuation.separator.glsl
-
   preprocessor-disabled:
     - match: ^\s*(#\s*if(n?def)?)\b
       captures:
@@ -186,7 +180,6 @@ contexts:
 
   statements:
     - include: preprocessor-statements
-    - include: label
     - include: expressions
 
   expressions:
