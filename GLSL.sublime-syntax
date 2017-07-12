@@ -63,50 +63,6 @@ contexts:
         - match: \n
           pop: true
 
-  strings:
-    - match: '(L|u8|u|U)?(")'
-      captures:
-        1: storage.type.string.glsl
-        2: punctuation.definition.string.begin.glsl
-      push:
-        - meta_scope: string.quoted.double.glsl
-        - match: '"'
-          scope: punctuation.definition.string.end.glsl
-          pop: true
-        - include: string_escaped_char
-        - include: string_placeholder
-    - match: "(L|u8|u|U)?(')"
-      captures:
-        1: storage.type.string.glsl
-        2: punctuation.definition.string.begin.glsl
-      push:
-        - meta_scope: string.quoted.single.glsl
-        - match: "'"
-          scope: punctuation.definition.string.end.glsl
-          pop: true
-        - include: string_escaped_char
-
-  string_escaped_char:
-    - match: '(\\)$\n'
-      captures:
-        1: punctuation.separator.continuation.glsl
-    - match: \\(?:\\|[abefnrtv\'"?]|[0-3][0-9]{0,2}|[4-7][0-9]?|x[a-fA-F0-9]+|u[a-fA-F0-9]{4}|U[a-fA-F0-9]{8})
-      scope: constant.character.escape.glsl
-    - match: \\.
-      scope: invalid.illegal.unknown-escape.glsl
-
-  string_placeholder:
-    - match: |-
-        (?x)%
-          (\d+\$)?                                      # field (argument #)
-          [#0\- +']*                                    # flags
-          [,;:_]?                                       # separator character (AltiVec)
-          ((-?\d+)|\*(-?\d+\$)?)?                       # minimum field width
-          (\.((-?\d+)|\*(-?\d+\$)?)?)?                  # precision
-          (hh|h|ll|l|j|t|z|q|L|vh|vl|v|hv|hl)?          # length modifier
-          (\[[^\]]+\]|[am]s|[diouxXDOUeEfFgGaACcSspn%]) # conversion type
-      scope: constant.other.placeholder.glsl
-
   keywords:
     - match: \b({{control_keywords}})\b
       scope: keyword.control.glsl
@@ -272,7 +228,6 @@ contexts:
     - include: keywords
     - include: numbers
     - include: operators
-    - include: strings
     - include: parens
     - include: brackets
     - include: block
@@ -555,7 +510,6 @@ contexts:
         - meta_scope: meta.attribute.glsl
         - meta_content_scope: meta.group.glsl
         - include: parens
-        - include: strings
         - match: \)\)
           scope: meta.group.glsl punctuation.section.group.end.glsl
           pop: true
@@ -578,7 +532,6 @@ contexts:
               scope: meta.group.glsl punctuation.section.group.end.glsl
               pop: true
             - include: numbers
-            - include: strings
             - match: \b(get|put)\b
               scope: variable.parameter.glsl
             - match: ','
@@ -1109,7 +1062,6 @@ contexts:
         - include: preprocessor-line-continuation
         - include: preprocessor-line-ending
         - include: preprocessor-comments
-        - include: strings
         - match: '\S+'
           scope: string.unquoted.glsl
     - match: ^\s*(#\s*(?:include|include_next|import))\b
