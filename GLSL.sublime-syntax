@@ -105,8 +105,6 @@ contexts:
     # Negative lookahead prevents match :: when included in C++
     - match: '\?|:(?!:)'
       scope: keyword.operator.ternary.glsl
-    - match: '\.\.\.'
-      scope: keyword.operator.variadic.glsl
 
   access:
     - match: '(\.)({{identifier}})(?!\s*\()'
