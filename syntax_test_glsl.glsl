@@ -27,6 +27,8 @@ uniform int foo;
 uniform float x;
 //      ^^^^^ storage.type
 //             ^ punctuation.terminator
+uniform sampler2DArray bar;
+//      ^^^^^^^^^^^^^^ storage.type
 in ivec3 foo;
 // ^^^^^ storage.type
 //          ^ punctuation.terminator
