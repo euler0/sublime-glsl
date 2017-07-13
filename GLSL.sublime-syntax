@@ -20,13 +20,13 @@ file_extensions:
   - tese
   - comp
   - glsl
-first_line_match: '-[*]-( Mode:)? GLSL -[*]-'
+first_line_match: -[*]-( Mode:)? GLSL -[*]-
 scope: source.glsl
 
 variables:
-  identifier: '\b[[:alpha:]_][[:alnum:]_]*\b'
-  non_func_keywords: 'if|for|switch|while'
-  before_tag: 'struct'
+  identifier: \b[[:alpha:]_][[:alnum:]_]*\b
+  non_func_keywords: if|for|switch|while
+  before_tag: struct
   
   control_keywords: |
     (?x) # ignore whitespace in this regex
@@ -231,7 +231,7 @@ contexts:
       scope: punctuation.definition.comment.glsl
       push:
         - meta_scope: comment.line.double-slash.glsl
-        - match: '(\\)$\n'
+        - match: (\\)$\n
           captures:
             1: punctuation.separator.continuation.glsl
         - match: \n
@@ -430,7 +430,7 @@ contexts:
     - match: \b({{basic_types}}|{{before_tag}})\b
       scope: storage.type.glsl
   numbers:
-    - match: '\b((0(x|X)[0-9a-fA-F]*(\.[0-9a-fA-F]+p-?\d+)?)|(([0-9]+\.?[0-9]*)|(\.[0-9]+))((e|E)(\+|-)?[0-9]+)?)([fF]|(l{1,2}|L{1,2})[uU]?|[uU](l{0,2}|L{0,2}))?\b'
+    - match: \b((0(x|X)[0-9a-fA-F]*(\.[0-9a-fA-F]+p-?\d+)?)|(([0-9]+\.?[0-9]*)|(\.[0-9]+))((e|E)(\+|-)?[0-9]+)?)([fF]|(l{1,2}|L{1,2})[uU]?|[uU](l{0,2}|L{0,2}))?\b
       scope: constant.numeric.glsl
 
   operators:
@@ -440,14 +440,13 @@ contexts:
       scope: keyword.operator.arithmetic.glsl
     - match: <\=|>\=|\=\=|<|>|\!\=
       scope: keyword.operator.comparison.glsl
-    # These two operator can be both arithmetic and pointer/address related
     - match: \*|&
       scope: keyword.operator.glsl
     - match: \=
       scope: keyword.operator.assignment.glsl
 
   access:
-    - match: '(\.)({{identifier}})(?!\s*\()'
+    - match: (\.)({{identifier}})(?!\s*\()
       captures:
         1: punctuation.accessor.glsl
         2: variable.other.member.glsl
@@ -466,7 +465,7 @@ contexts:
     - include: pragma-mark
 
   preprocessor-line-continuation:
-    - match: '(\\)$\n'
+    - match: (\\)$\n
       captures:
         1: punctuation.separator.continuation.glsl
     - match: \\(\s+?)$
@@ -495,7 +494,7 @@ contexts:
       scope: punctuation.definition.comment.glsl
       push:
         - meta_scope: comment.line.double-slash.glsl
-        - match: '(\\)$\n'
+        - match: (\\)$\n
           captures:
             1: punctuation.separator.continuation.glsl
           pop: true
@@ -512,12 +511,12 @@ contexts:
 
   # Used by "inc" snippets to prevent double ##include
   incomplete-inc:
-    - match: '^\s*(#i(nc?)?)\b\s*'
+    - match: ^\s*(#i(nc?)?)\b\s*
       scope: meta.preprocessor.incomplete.glsl
 
   global:
     - include: early-expressions
-    - match: '^\s*(?=\w+)'
+    - match: ^\s*(?=\w+)
       push: global-modifier
     - include: late-expressions
 
@@ -543,9 +542,9 @@ contexts:
     - include: block
     - include: variables
     - include: constants
-    - match: ','
+    - match: \,
       scope: punctuation.separator.glsl
-    - match: '\)|\}'
+    - match: '[)}]'
       scope: invalid.illegal.stray-bracket-end.glsl
     - match: '{{reserved_keyword_for_future_use}}'
       scope: invalid.illegal.reserved-keyword.glsl
@@ -560,7 +559,7 @@ contexts:
   global-modifier:
     - include: comments
     - include: modifiers
-    - match: '(?=\S)'
+    - match: (?=\S)
       set: global-type
 
   global-type:
@@ -584,21 +583,21 @@ contexts:
       set: global-maybe-function
     # The previous match handles return types of struct from a func,
     # there this one exits the context to allow matching an actual struct
-    - match: '(?=\b({{before_tag}})\b)'
+    - match: (?=\b({{before_tag}})\b)
       set: data-structures
-    - match: '(?=\b({{control_keywords}})\b)'
+    - match: (?=\b({{control_keywords}})\b)
       pop: true
-    - match: '(?=\s)'
+    - match: (?=\s)
       set: global-maybe-function
     # Allow a macro call
-    - match: '({{identifier}})\s*(\()(?=[^\)]+\))'
+    - match: ({{identifier}})\s*(\()(?=[^\)]+\))
       captures:
         1: variable.function.glsl
         2: meta.group.glsl punctuation.section.group.begin.glsl
       push:
         - meta_scope: meta.function-call.glsl
         - meta_content_scope: meta.group.glsl
-        - match: '\)'
+        - match: \)
           scope: meta.group.glsl punctuation.section.group.end.glsl
           pop: true
         - include: expressions
@@ -627,13 +626,13 @@ contexts:
     - match: '{{identifier}}(?=\s*(\(|$))'
       scope: meta.function.glsl entity.name.function.glsl
       set: function-definition-params
-    - match: '(?=\S)'
+    - match: (?=\S)
       pop: true
 
   function-definition-params:
     - meta_content_scope: meta.function.glsl
     - include: comments
-    - match: '(?=\()'
+    - match: (?=\()
       set:
         - match: \(
           scope: meta.function.parameters.glsl meta.group.glsl punctuation.section.group.begin.glsl
@@ -642,7 +641,7 @@ contexts:
             - match : \)
               scope: punctuation.section.group.end.glsl
               set: function-definition-continue
-            - match: '\bvoid\b'
+            - match: \bvoid\b
               scope: storage.type.glsl
             - match: '{{identifier}}(?=\s*(\[|,|\)))'
               scope: variable.parameter.glsl
@@ -653,38 +652,38 @@ contexts:
   function-definition-continue:
     - meta_content_scope: meta.function.glsl
     - include: comments
-    - match: '(?=;)'
+    - match: (?=;)
       pop: true
     - match: \b(const|final|noexcept|override)\b
       scope: storage.modifier.glsl
-    - match: '(?=\{)'
+    - match: (?={)
       set: function-definition-body
-    - match: '(?=\S)'
+    - match: (?=\S)
       pop: true
 
   function-definition-body:
     - meta_content_scope: meta.function.glsl
-    - match: '\{'
+    - match: \{
       scope: meta.block.glsl punctuation.section.block.begin.glsl
       set:
         - meta_content_scope: meta.function.glsl meta.block.glsl
-        - match: '\}'
+        - match: \}
           scope: meta.function.glsl meta.block.glsl punctuation.section.block.end.glsl
           pop: true
         - match: (?=^\s*#\s*(elif|else|endif)\b)
           pop: true
-        - match: '(?=({{before_tag}})([^(;]+$|.*\{))'
+        - match: (?=({{before_tag}})([^(;]+$|.*{))
           push: data-structures
         - include: statements
 
   data-structures:
     # Detect variable type definitions using struct followed by a tag
-    - match: '\b({{before_tag}})(?=\s+{{identifier}}\s+{{identifier}}\s*[=;\[])'
+    - match: \b({{before_tag}})(?=\s+{{identifier}}\s+{{identifier}}\s*[=;\[])
       scope: storage.type.glsl
-    - match: '\bstruct\b'
+    - match: \bstruct\b
       scope: storage.type.glsl
       set: data-structures-struct-definition
-    - match: '(?=\S)'
+    - match: (?=\S)
       pop: true
 
   data-structures-struct-definition:
@@ -694,43 +693,43 @@ contexts:
       scope: entity.name.struct.forward-decl.glsl
     - match: '{{identifier}}'
       scope: entity.name.struct.glsl
-    - match: '(?=;)'
+    - match: (?=;)
       pop: true
-    - match: '\{'
+    - match: \{
       scope: meta.block.glsl punctuation.section.block.begin.glsl
       set:
         - meta_content_scope: meta.struct.glsl meta.block.glsl
-        - match: '\}'
+        - match: \}
           scope: meta.struct.glsl meta.block.glsl punctuation.section.block.end.glsl
           pop: true
         - include: data-structures-body
 
   data-structures-definition-common-begin:
     - include: comments
-    - match: '(?=\b(?:{{before_tag}}|{{control_keywords}})\b)'
+    - match: (?=\b(?:{{before_tag}}|{{control_keywords}})\b)
       pop: true
     - include: modifiers
     # Handle macros so they aren't matched as the class name
-    - match: '\b[[:upper:][:digit:]_]+\b'
+    - match: \b[[:upper:][:digit:]_]+\b
 
   data-structures-definition-common-end:
-    - match: '(?=;)'
+    - match: (?=;)
       pop: true
 
   data-structures-body:
     - include: preprocessor-data-structures
-    - match: '(?={{before_tag}})'
+    - match: (?={{before_tag}})
       push: data-structures
     - include: expressions
 
   block:
-    - match: '\{'
+    - match: \{
       scope: punctuation.section.block.begin.glsl
       push:
         - meta_scope: meta.block.glsl
         - match: (?=^\s*#\s*(elif|else|endif)\b)
           pop: true
-        - match: '\}'
+        - match: \}
           scope: punctuation.section.block.end.glsl
           pop: true
         - include: statements
@@ -756,7 +755,7 @@ contexts:
         - include: expressions
 
   case-default:
-    - match: '\b(default|case)\b'
+    - match: \b(default|case)\b
       scope: keyword.control.glsl
       push:
         - match: ':'
@@ -1096,7 +1095,7 @@ contexts:
     - include: functions-builtin
     - match: '{{identifier}}'
       scope: variable.function.glsl
-    - match: '\('
+    - match: \(
       scope: meta.group.glsl punctuation.section.group.begin.glsl
       set: preprocessor-if-branch-function-call-arguments
 
@@ -1165,10 +1164,10 @@ contexts:
   ## Preprocessor other
 
   negated-block:
-    - match: '\}'
+    - match: \}
       scope: punctuation.section.block.end.glsl
       push:
-        - match: '\{'
+        - match: \{
           scope: punctuation.section.block.begin.glsl
           pop: true
         - match: (?=^\s*#\s*(elif|else|endif)\b)
@@ -1180,10 +1179,10 @@ contexts:
     - include: preprocessor-line-continuation
     - include: preprocessor-line-ending
     - include: preprocessor-comments
-    - match: '({{identifier}})(?=\()'
+    - match: ({{identifier}})(?=\()
       scope: entity.name.function.preprocessor.glsl
       set:
-        - match: '\('
+        - match: \(
           scope: punctuation.section.group.begin.glsl
           set: preprocessor-macro-params
     - match: '{{identifier}}'
@@ -1247,7 +1246,7 @@ contexts:
     - match: \)
       scope: punctuation.section.group.end.glsl
       set: preprocessor-macro-definition
-    - match: ','
+    - match: \,
       scope: punctuation.separator.glsl
       push:
         - match: '{{identifier}}'
@@ -1255,20 +1254,20 @@ contexts:
           pop: true
         - include: preprocessor-line-continuation
         - include: preprocessor-comments
-        - match: '\.\.\.'
+        - match: \.\.\.
           scope: keyword.operator.variadic.glsl
-        - match: '(?=\))'
+        - match: (?=\))
           pop: true
         - match: (/\*).*(\*/)
           scope: comment.block.glsl
           captures:
             1: punctuation.definition.comment.glsl
             2: punctuation.definition.comment.glsl
-        - match: '\S+'
+        - match: \S+
           scope: invalid.illegal.unexpected-character.glsl
     - include: preprocessor-line-continuation
     - include: preprocessor-comments
-    - match: '\.\.\.'
+    - match: \.\.\.
       scope: keyword.operator.variadic.glsl
     - match: (/\*).*(\*/)
       scope: comment.block.glsl
@@ -1284,9 +1283,9 @@ contexts:
     - include: preprocessor-line-ending
     - include: preprocessor-comments
     # Don't define blocks in define statements
-    - match: '\{'
+    - match: \{
       scope: punctuation.section.block.begin.glsl
-    - match: '\}'
+    - match: \}
       scope: punctuation.section.block.end.glsl
     - include: expressions
 
@@ -1312,7 +1311,7 @@ contexts:
         - include: preprocessor-line-continuation
         - include: preprocessor-line-ending
         - include: preprocessor-comments
-        - match: '\S+'
+        - match: \S+
           scope: string.unquoted.glsl
     - match: ^\s*(#\s*(?:include|include_next|import))\b
       captures:
