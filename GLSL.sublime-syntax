@@ -29,6 +29,49 @@ variables:
   before_tag: 'struct|enum'
   modifiers: '\b(layout|attribute|centroid|sampler|patch|const|flat|in|inout|invariant|noperspective|out|smooth|uniform|varying|buffer|shared|coherent|readonly|writeonly)\b'
   non_func_keywords: 'if|for|switch|while'
+  reserved_keyword_for_future_use: |
+    (?x) # ignore whitespace in this regex
+      \b(?:
+        common |
+        partition |
+        active |
+        asm |
+        class |
+        union |
+        enum |
+        typedef |
+        template |
+        this |
+        resource |
+        goto |
+        inline |
+        noinline |
+        public |
+        static |
+        extern |
+        external |
+        interface |
+        long |
+        short |
+        half |
+        fixed |
+        unsigned |
+        superp |
+        input |
+        output |
+        hvec2 |
+        hvec3 |
+        hvec4 |
+        fvec2 |
+        fvec3 |
+        fvec4 |
+        sampler3DRect |
+        filter |
+        sizeof |
+        cast |
+        namespace |
+        using
+      )\b
 
 contexts:
   main:
@@ -204,6 +247,8 @@ contexts:
       scope: punctuation.separator.glsl
     - match: '\)|\}'
       scope: invalid.illegal.stray-bracket-end.glsl
+    - match: '{{reserved_keyword_for_future_use}}'
+      scope: invalid.illegal.reserved-keyword.glsl
 
   late-expressions:
     - include: modifiers

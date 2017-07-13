@@ -86,6 +86,15 @@ uniform LightSource Light[4];
 //                        ^ meta.brackets constant.numeric
 //                         ^ meta.brackets punctuation.section.brackets.end
 //                          ^ punctuation.terminator
+class hello {
+// <- invalid.illegal.reserved-keyword
+};
+union whatever {
+// <- invalid.illegal.reserved-keyword
+};
+enum foo {
+// <- invalid.illegal.reserved-keyword
+};
 
 in vec4 uv;
 // <- storage.modifier
@@ -171,6 +180,9 @@ void main()
     {
         finalColor = vec4(1.0f, 0.0f, 0.0f, 0.0f);
     }
+    template foo;
+    // <- invalid.illegal.reserved-keyword
+    //          ^ punctuation.terminator
 }
 //<- meta.function meta.block punctuation.section.block.end
 
