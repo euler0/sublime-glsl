@@ -26,7 +26,7 @@ scope: source.glsl
 variables:
   identifier: '\b[[:alpha:]_][[:alnum:]_]*\b'
   non_func_keywords: 'if|for|switch|while'
-  before_tag: 'struct|enum'
+  before_tag: 'struct'
   
   control_keywords: |
     (?x) # ignore whitespace in this regex
@@ -567,7 +567,7 @@ contexts:
     - include: comments
     - match: \*
       scope: keyword.operator.glsl
-    # If a struct/union/enum followed by a name that is not a macro or declspec
+    # If a struct followed by a name that is not a macro or declspec
     # then this is likely a return type of a function. This is uncommon.
     - match: |-
         (?x:
@@ -582,8 +582,8 @@ contexts:
       captures:
         1: storage.type.glsl
       set: global-maybe-function
-    # The previous match handles return types of struct/enum/etc from a func,
-    # there this one exits the context to allow matching an actual struct/union
+    # The previous match handles return types of struct from a func,
+    # there this one exits the context to allow matching an actual struct
     - match: '(?=\b({{before_tag}})\b)'
       set: data-structures
     - match: '(?=\b({{control_keywords}})\b)'
@@ -678,18 +678,12 @@ contexts:
         - include: statements
 
   data-structures:
-    # Detect variable type definitions using struct/enum/union followed by a tag
+    # Detect variable type definitions using struct followed by a tag
     - match: '\b({{before_tag}})(?=\s+{{identifier}}\s+{{identifier}}\s*[=;\[])'
       scope: storage.type.glsl
     - match: '\bstruct\b'
       scope: storage.type.glsl
       set: data-structures-struct-definition
-    - match: '\benum\b'
-      scope: storage.type.glsl
-      set: data-structures-enum-definition
-    - match: '\bunion\b'
-      scope: storage.type.glsl
-      set: data-structures-union-definition
     - match: '(?=\S)'
       pop: true
 
@@ -708,43 +702,6 @@ contexts:
         - meta_content_scope: meta.struct.glsl meta.block.glsl
         - match: '\}'
           scope: meta.struct.glsl meta.block.glsl punctuation.section.block.end.glsl
-          pop: true
-        - include: data-structures-body
-
-  data-structures-enum-definition:
-    - meta_scope: meta.enum.glsl
-    - include: data-structures-definition-common-begin
-    - match: '{{identifier}}(?=\s*;)'
-      scope: entity.name.enum.forward-decl.glsl
-    - match: '{{identifier}}'
-      scope: entity.name.enum.glsl
-    - match: '(?=;)'
-      pop: true
-    - match: '\{'
-      scope: meta.block.glsl punctuation.section.block.begin.glsl
-      set:
-        - meta_content_scope: meta.enum.glsl meta.block.glsl
-        # Enums don't support methods so we have a simplified body
-        - match: '\}'
-          scope: meta.enum.glsl meta.block.glsl punctuation.section.block.end.glsl
-          pop: true
-        - include: data-structures-body
-
-  data-structures-union-definition:
-    - meta_scope: meta.union.glsl
-    - include: data-structures-definition-common-begin
-    - match: '{{identifier}}(?=\s*;)'
-      scope: entity.name.union.forward-decl.glsl
-    - match: '{{identifier}}'
-      scope: entity.name.union.glsl
-    - match: '(?=;)'
-      pop: true
-    - match: '\{'
-      scope: meta.block.glsl punctuation.section.block.begin.glsl
-      set:
-        - meta_content_scope: meta.union.glsl meta.block.glsl
-        - match: '\}'
-          scope: meta.union.glsl meta.block.glsl punctuation.section.block.end.glsl
           pop: true
         - include: data-structures-body
 
