@@ -9,8 +9,18 @@
 #error some error message
 // <- meta.preprocessor.diagnostic keyword.control.import.error
 //     ^ meta.preprocessor.diagnostic string.unquoted
-#warning // not a preprocessor token!
+#warning // not a preprocessor token!!!
 // <- - meta.preprocessor
+#extension extension_name : require
+// <- meta.preprocessor.macro keyword.control.import.extension
+//         ^^^^^^^^^^^^^^ meta.preprocessor.macro string.unquoted
+//                        ^ meta.preprocessor.macro punctuation.separator
+//                          ^^^^^^^ variable.parameter
+#extension all : require
+// <- meta.preprocessor.macro keyword.control.import.extension
+//         ^^^ meta.preprocessor.macro string.unquoted constant.language
+//             ^ meta.preprocessor.macro punctuation.separator
+//               ^^^^^^^ variable.parameter
 #include <pbr/deffered/geometry_buffer.glsl>
 //<- meta.preprocessor.include.glsl keyword.control.import.include
 //       ^ meta.preprocessor.include string.quoted.other.lt-gt.include punctuation.definition.string.begin

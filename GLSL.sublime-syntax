@@ -565,6 +565,7 @@ contexts:
     - include: incomplete-inc
     - include: preprocessor-macro-version
     - include: preprocessor-macro-define
+    - include: preprocessor-macro-extension
     - include: pragma-mark
     - include: preprocessor-other
 
@@ -886,6 +887,44 @@ contexts:
     - match: '{{identifier}}'
       scope: entity.name.constant.preprocessor.glsl
       set: preprocessor-macro-definition
+
+  preprocessor-macro-extension:
+    - match: ^\s*(#\s*extension)\b
+      captures:
+        1: meta.preprocessor.macro.glsl keyword.control.import.extension.glsl
+      push:
+        - meta_content_scope: meta.preprocessor.macro.glsl
+        - include: preprocessor-line-continuation
+        - include: preprocessor-line-ending
+        - include: preprocessor-comments
+        - match: \ball\b
+          scope: string.unquoted.glsl constant.language.glsl
+          set: preprocessor-macro-extension-inside
+        - match: '{{identifier}}'
+          scope: string.unquoted.glsl
+          set: preprocessor-macro-extension-inside
+        - match: (?=\S)
+          pop: true
+
+  preprocessor-macro-extension-inside:
+    - meta_content_scope: meta.preprocessor.macro.glsl
+    - include: preprocessor-line-continuation
+    - include: preprocessor-line-ending
+    - include: preprocessor-comments
+    - match: ":"
+      scope: punctuation.separator.glsl
+      set:
+        - meta_content_scope: meta.preprocessor.macro.glsl
+        - include: preprocessor-line-continuation
+        - include: preprocessor-line-ending
+        - include: preprocessor-comments
+        - match: '{{identifier}}'
+          scope: variable.parameter.glsl
+          pop: true
+        - match: (?=\S)
+          pop: true
+    - match: (?=\S)
+      pop: true
 
   preprocessor-macro-version:
     - match: ^\s*(#\s*version)\b
