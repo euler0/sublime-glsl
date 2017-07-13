@@ -6,7 +6,11 @@
 #version 420 core
 //<- meta.preprocessor.macro keyword.control.import.version
 //^^^^^^ meta.preprocessor.macro keyword.control.import.version
-
+#error some error message
+// <- meta.preprocessor.diagnostic keyword.control.import.error
+//     ^ meta.preprocessor.diagnostic string.unquoted
+#warning // not a preprocessor token!
+// <- - meta.preprocessor
 #include <pbr/deffered/geometry_buffer.glsl>
 //<- meta.preprocessor.include.glsl keyword.control.import.include
 //       ^ meta.preprocessor.include string.quoted.other.lt-gt.include punctuation.definition.string.begin

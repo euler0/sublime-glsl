@@ -963,7 +963,7 @@ contexts:
     - match: ^\s*(#\s*endif)\b
       captures:
         1: meta.preprocessor.glsl keyword.control.import.glsl
-    - match: ^\s*(#\s*(?:error|warning))\b
+    - match: ^\s*(#\s*(?:error))\b
       captures:
         1: keyword.control.import.error.glsl
       push:
