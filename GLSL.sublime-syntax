@@ -157,7 +157,9 @@ variables:
         shared |
         coherent |
         readonly |
-        writeonly
+        writeonly |
+        volatile |
+        restrict
       )\b
   
   reserved_keyword_for_future_use: |

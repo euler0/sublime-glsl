@@ -114,7 +114,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(layout|attribute|centroid|sampler|patch|const|flat|in|inout|invariant|noperspective|out|smooth|uniform|varying|buffer|shared|coherent|readonly|writeonly)\b</string>
+			<string>\b(layout|attribute|centroid|sampler|patch|const|flat|in|inout|invariant|noperspective|out|smooth|uniform|varying|buffer|shared|coherent|readonly|writeonly|volatile|restrict)\b</string>
 			<key>name</key>
 			<string>storage.modifier.glsl</string>
 		</dict>
