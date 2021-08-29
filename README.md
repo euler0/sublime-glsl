@@ -2,7 +2,7 @@
 
 ## Supported Extensions
 
-    vs, fs, gs, vsh, fsh, gsh, vshader, fshader, gshader, vert, frag, geom, tesc, tese, comp, glsl
+    vs, fs, gs, vsh, fsh, gsh, vshader, fshader, gshader, vert, frag, geom, tesc, tese, comp, glsl, .mesh .task, .rgen, .rint, .rahit, .rchit, rmiss, and rcall
 
 ## How to Install ##
 

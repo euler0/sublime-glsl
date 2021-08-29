@@ -20,6 +20,14 @@ file_extensions:
   - tese
   - comp
   - glsl
+  - mesh
+  - task
+  - rgen
+  - rint
+  - rahit
+  - rchit
+  - rmiss
+  - rcall
 first_line_match: -[*]-( Mode:)? GLSL -[*]-
 scope: source.glsl
 
